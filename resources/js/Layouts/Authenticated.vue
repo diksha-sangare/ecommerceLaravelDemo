@@ -18,9 +18,25 @@
                                 <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </BreezeNavLink>
-                                <BreezeNavLink :href="route('blog')" :active="route().current('blog')">
-                                    Blog
-                                </BreezeNavLink>
+
+                                <div class="mt-4" v-if="$page.props.auth.user.isAdmin == 1">
+                                    <BreezeNavLink :href="route('category')" :active="route().current('category')">
+                                        Categories
+                                    </BreezeNavLink> &nbsp; &nbsp; &nbsp;
+                                    <BreezeNavLink :href="route('blog')" :active="route().current('blog')">
+                                        Blogs
+                                    </BreezeNavLink> &nbsp; &nbsp; &nbsp;
+                                    <BreezeNavLink :href="route('blogCategory')" :active="route().current('blogCategory')">
+                                        Blog Categories
+                                    </BreezeNavLink>
+                                </div>
+                                <div class="mt-4" v-else>
+                                    <BreezeNavLink :href="route('blog')" :active="route().current('blog')">
+                                        Blog
+                                    </BreezeNavLink>
+                                </div>
+
+                               
                             </div>
                         </div>
 
