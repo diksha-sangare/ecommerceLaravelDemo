@@ -29,7 +29,8 @@
                             </div>
                             <div class="mt-4">
                                 <BreezeLabel for="image" value="Image" />
-                                <BreezeInput id="image" name="image" type="text" class="mt-1 block w-full" v-model="form.image" required autocomplete="image" />
+                                <input type="file"  @change="previewImage" name="image" ref="photo" class="w-full px-4 py-2  mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+                                <!-- <BreezeInput id="image" name="image" type="text" class="mt-1 block w-full" v-model="form.image" required autocomplete="image" /> -->
                             </div>
 
 
@@ -79,8 +80,15 @@ export default {
 
     methods: {
         submit() {
+             if (this.$refs.photo) {
+                this.form.image = this.$refs.photo.files[0];
+            }
             this.form.post(this.route('blog.store'))
-        }
+        },
+         previewImage(e) {
+            const file = e.target.files[0];
+            this.url = URL.createObjectURL(file);
+        },
     }
    
 }

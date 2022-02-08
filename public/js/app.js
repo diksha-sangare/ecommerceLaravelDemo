@@ -20006,7 +20006,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
+      if (this.$refs.photo) {
+        this.form.image = this.$refs.photo.files[0];
+      }
+
       this.form.post(this.route('blog.store'));
+    },
+    previewImage: function previewImage(e) {
+      var file = e.target.files[0];
+      this.url = URL.createObjectURL(file);
     }
   }
 });
@@ -20037,6 +20045,11 @@ __webpack_require__.r(__webpack_exports__);
     Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Head,
     BreezeNavLink: _Components_NavLink_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Link
+  },
+  methods: {
+    showImage: function showImage() {
+      return "/storage/";
+    }
   },
   props: {
     blogs: Object
@@ -21535,20 +21548,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeLabel, {
         "for": "image",
         value: "Image"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeInput, {
-        id: "image",
-        name: "image",
-        type: "text",
-        "class": "mt-1 block w-full",
-        modelValue: $data.form.image,
-        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-          return $data.form.image = $event;
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        type: "file",
+        onChange: _cache[3] || (_cache[3] = function () {
+          return $options.previewImage && $options.previewImage.apply($options, arguments);
         }),
-        required: "",
-        autocomplete: "image"
-      }, null, 8
-      /* PROPS */
-      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeButton, {
+        name: "image",
+        ref: "photo",
+        "class": "w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+      }, null, 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <BreezeInput id=\"image\" name=\"image\" type=\"text\" class=\"mt-1 block w-full\" v-model=\"form.image\" required autocomplete=\"image\" /> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeButton, {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["ml-4", {
           'opacity-25': $data.form.processing
         }]),
@@ -21689,6 +21699,7 @@ var _hoisted_19 = {
 var _hoisted_20 = {
   "class": "px-4 py-2"
 };
+var _hoisted_21 = ["src"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -21728,9 +21739,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* TEXT */
         ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(blog.body), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(blog.image), 1
-        /* TEXT */
-        )]);
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+          src: $options.showImage() + blog.image,
+          "class": "object-cover h-40 w-80"
+        }, null, 8
+        /* PROPS */
+        , _hoisted_21)])]);
       }), 128
       /* KEYED_FRAGMENT */
       ))])])])])])])];

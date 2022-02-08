@@ -54,7 +54,9 @@
                                     <td class="px-4 py-2">{{ blog.title }}</td>
                                     <td class="px-4 py-2">{{ blog.slug }}</td>
                                     <td class="px-4 py-2">{{ blog.body }}</td>
-                                    <td class="px-4 py-2">{{ blog.image }}</td>
+                                    <td class="px-4 py-2">
+                                         <img :src="showImage() + blog.image" class="object-cover h-40 w-80"/>
+                                    </td>
                                     
                                 </tr>
                             </tbody>
@@ -78,6 +80,11 @@ export default {
         Head,
          BreezeNavLink,
         Link,
+    },
+    methods: {
+        showImage() {
+            return "/storage/";
+        },
     },
      props: {
         blogs: Object,
